@@ -1,5 +1,19 @@
 services:
-  app:
+  api:
     build: .
     ports:
       - "8020:8020"
+    volumes:
+      - app-data:/app/data
+
+  web:
+    build: ./web
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8020
+    depends_on:
+      - api
+
+volumes:
+  app-data:

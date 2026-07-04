@@ -2,29 +2,56 @@
 
 [![CI](https://github.com/GavrilovEgorOf/fullstack-ai-saas/actions/workflows/ci.yml/badge.svg)](https://github.com/GavrilovEgorOf/fullstack-ai-saas/actions/workflows/ci.yml)
 
-**Small SaaS-shaped demo** — landing page, login, workspace dashboard, doc list, “ask AI” with citations, monthly query cap.
+**Team doc library with AI Q&A** — landing, login, workspace dashboard, doc upload, questions with citations, usage limits, history export.
 
-FastAPI backend + static frontend — auth, usage limits, and an AI Q&A feature in a small product-shaped UI.
+GitHub repo slug: `fullstack-ai-saas`. Stack: **FastAPI + Next.js**.
 
 ## Demo login
 
 - Email: `demo@team.com`
 - Password: `demo1234`
 
-## Run
+Free-tier demo: `free@team.com` / `free1234` (near query limit)
+
+## Run locally
+
+Terminal 1 — API:
 
 ```bash
-pip install -e .
+pip install -e ".[dev]"
 uvicorn backend.main:app --reload --port 8020
 ```
 
-Open http://localhost:8020 — landing at `/`, dashboard at `/dashboard.html`
+Terminal 2 — Next.js:
 
-Docker: `docker compose up --build`
+```bash
+cd web
+npm install
+npm run dev
+```
+
+Open http://localhost:3000
+
+Docker: `docker compose up --build` (API on :8020, web on :3000)
+
+## Features
+
+- JWT login and workspace isolation
+- Doc upload with background indexing job
+- Q&A with citations (mock RAG over indexed docs)
+- Free vs pro query limits
+- Q&A history + CSV export
+
+## Tests
+
+```bash
+pytest -q
+cd web && npm run build
+```
 
 ## Related
 
-Heavier RAG backend: [enterprise-rag-assistant](https://github.com/GavrilovEgorOf/enterprise-rag-assistant)
+RAG backend with eval CI: [enterprise-rag-assistant](https://github.com/GavrilovEgorOf/enterprise-rag-assistant)
 
 ## Roadmap
 
